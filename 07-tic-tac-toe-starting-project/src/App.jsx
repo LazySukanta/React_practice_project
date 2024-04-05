@@ -1,3 +1,4 @@
+import GameBoard from "./components/GameBoard"
 import Player from "./components/Player"
 
 function App() {
@@ -14,8 +15,8 @@ function App() {
 
         </ol>
 
-
-        Game Board
+        <GameBoard />
+        {/* Game Board */}
       </div>
     </main>
   )
