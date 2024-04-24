@@ -1,14 +1,23 @@
+import { useEffect, useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 
 const Header = () => {
+  const [btnName, setBtnName] = useState("LogIn");
+  const handleBtnClick = () => {
+    setBtnName((prev) => {
+      if (prev === "LogIn") return "LogOut";
+      else return "LogIn";
+    });
+  }; 
+  
+  useEffect(() => {
+    console.log("UseEffect");
+  },[btnName]);
+
   return (
     <div className="header">
       <div className="logo-container">
-        <img
-          className="logo"
-          src={LOGO_URL}
-          alt=""
-        />
+        <img className="logo" src={LOGO_URL} alt="" />
       </div>
 
       <div className="nav-items">
@@ -17,6 +26,9 @@ const Header = () => {
           <li>About Us</li>
           <li>Contact us</li>
           <li>Cart</li>
+          <button className="login" onClick={handleBtnClick}>
+            {btnName}
+          </button>
         </ul>
       </div>
     </div>

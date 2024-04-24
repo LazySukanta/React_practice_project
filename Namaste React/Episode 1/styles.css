@@ -21,7 +21,8 @@
   cursor: pointer;
   font-size: larger;
 }
-.nav-items>ul>li:hover{
+
+.nav-items>ul>li:hover {
   background-color: azure;
   border: 1px solid gray;
 }
@@ -30,19 +31,21 @@
   padding: 10px;
 }
 
-.res-container{
+.res-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+
 .res-card {
   width: 200px;
   height: 400px;
-  
+
   padding: 5px;
   margin: 5px;
 }
-.res-card:hover{
+
+.res-card:hover {
   border: 1px solid black;
   cursor: pointer;
 }
@@ -52,4 +55,50 @@
   height: 130px;
   background-size: cover;
 
+}
+
+.filter-btn {
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.shimmer-card {
+  background-color: #f0f0f0;
+
+  width: 200px;
+  height: 400px;
+
+  padding: 5px;
+  margin: 5px;
+}
+.shimmer-btn{
+  width: 150px;
+  height: 40px;
+  margin: 10px;
+  padding: 10px;
+  border: none;
+}
+.login{
+  font-weight: bold;
+  font-size: 1.3rem;
+  padding:0px 30px;
+  cursor: pointer;
+}
+.filter{
+  display: flex;
+  
+}
+.search-input{
+  padding: 10px;
+  margin-right: 10px;
+}
+.search-btn{
+  padding: 10px;
 }
