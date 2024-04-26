@@ -12,17 +12,17 @@ const RestaurantMenu = () => {
       "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.572646&lng=88.36389500000001&restaurantId=651011&catalog_qa=undefined&isMenuUx4=true&submitAction=ENTER"
     );
     const json = await data.json();
-    setResInfo(json.data);
-    console.log(json.data);
+    setResInfo(json.data?.cards[2]?.card?.card?.info);
+    console.log(json.data?.cards[2]?.card?.card?.info);
   };
 
-  // const { name, cuisines, costForTwoMessage } =    resInfo?.data?.cards[2]?.card?.card?.info;
+  
 
   return (
     <div className="menu">
-      {/* <h1>{name}</h1>
-      <p>{cuisines.join(", ")}</p>
-      <h2>{costForTwoMessage}</h2> */}
+      <h1>{resInfo.name}</h1>
+      <p>{resInfo.cuisines.join(", ")}</p>
+      <h2>{resInfo.costForTwoMessage}</h2>
       <ul>
         <li>Biriyani</li>
         <li>Brgers</li>

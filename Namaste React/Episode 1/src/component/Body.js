@@ -37,7 +37,7 @@ const Body = () => {
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
           />
-          <button 
+          <button
             className="search-btn"
             onClick={() => {
               const updatedList = listOfRestaurants.filter((res) =>
