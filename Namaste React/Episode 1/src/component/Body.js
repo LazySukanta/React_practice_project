@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import resObj from "../utils/mockData";
 import Shimers from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -40,10 +41,10 @@ const Body = () => {
           <button
             className="search-btn"
             onClick={() => {
-              const updatedList = listOfRestaurants.filter((res) =>
+              const newUpdatedList = listOfRestaurants.filter((res) =>
                 res.info.name.toLowerCase().includes(searchValue.toLowerCase())
               );
-              setFilteredRestaurant(updatedList);
+              setFilteredRestaurant(newUpdatedList);
             }}
           >
             Search
@@ -53,11 +54,10 @@ const Body = () => {
         <button
           className="filter-btn"
           onClick={() => {
-            // filter logic
             const updatedList = listOfRestaurants.filter(
-              (res) => res.info.avgRating >= 4.7
+              (res) => res.info.avgRating >= 4.5
             );
-            setListOfRestaurants(updatedList);
+            setFilteredRestaurant(updatedList);
           }}
         >
           Top Rated Restaurant
@@ -65,15 +65,9 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredRestaurant.map((restaurant) => (
-          <RestaurantCard
-            key={restaurant.info.id}
-            resName={restaurant.info.name}
-            cuisines={restaurant.info.cuisines}
-            avgRating={restaurant.info.avgRating}
-            costForTwo={restaurant.info.costForTwo}
-            deliveryTime={restaurant.info.sla.deliveryTime}
-            cloudinaryImageId={restaurant.info.cloudinaryImageId}
-          />
+          <Link to={`/restaurant/${restaurant.info.id}`}>
+            <RestaurantCard key={restaurant.info.id} restaurant={restaurant} />
+          </Link>
         ))}
       </div>
     </div>

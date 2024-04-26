@@ -38,6 +38,7 @@
 }
 
 .res-card {
+  text-decoration: none;
   width: 200px;
   height: 400px;
 
