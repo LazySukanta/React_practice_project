@@ -1,22 +1,12 @@
-import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { MENU_API } from "../utils/constants";
+import useRestaurantMenu from "../utils/useResTaurantMenu";
+
 
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
 
   const { resId } = useParams();
-
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
-  const fetchMenu = async () => {
-    const data = await fetch(`${MENU_API}${resId}`);
-    const json = await data.json();
-    setResInfo(json);
-  };
+  const resInfo = useRestaurantMenu(resId);
 
   if (resInfo === null) return <Shimmer />;
 
@@ -25,6 +15,12 @@ const RestaurantMenu = () => {
 
   const { itemCards } =
     resInfo.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card;
+
+  console.log("hello");
+  console.log(resInfo.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards);
+
+  const categories = resInfo.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards.filter( c => c.card.card["@type"] == "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory" )
+
 
   return (
     <div className="menu">
@@ -51,5 +47,3 @@ const RestaurantMenu = () => {
 };
 export default RestaurantMenu;
 
-// 4 > groupedCard > cardGroupMap > REGULAR > cards[1] > card > card >carousel[0](Loop) > dish > info > (name, description)
-// data.

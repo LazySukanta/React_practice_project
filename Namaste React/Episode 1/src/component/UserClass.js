@@ -1,13 +1,24 @@
 import React from "react";
-class UserClass extends React.Component {
 
-  constructor(props){
+class UserClass extends React.Component {
+  constructor(props) {
+    console.log("Child Constructor");
     super(props);
-    console.log(props);
+    this.state = {
+      count: 0,
+      count2: 100,
+      count3: 10000,
+    };
+  }
+
+  async  componentDidMount() {
+    // console.log("Child component did mount");
+
   }
 
   render() {
-    const {name,location} = this.props
+    console.log("Child Render");
+    const { name, location } = this.props;
     return (
       <div className="user-card">
         <h2>Name :{name}</h2>
@@ -19,3 +30,4 @@ class UserClass extends React.Component {
 }
 
 export default UserClass;
+ 
