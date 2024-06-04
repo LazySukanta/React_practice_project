@@ -1,24 +1,41 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./component/Header";
 import Body from "./component/Body";
-import About from "./component/About";
+// import About from "./component/About";
 import Contact from "./component/Contact";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import RestaurantMenu from "./component/Restaurantmenu";
 import Shimmer from "./component/Shimmer.js";
-
+import UserContext from "./utils/UserContext.js";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore.js";
 // import Grocery from "./component/Grocery";
 //Lazy Loading
 
 const Grocery = lazy(() => import("./component/Grocery"));
+const About = lazy(() => import("./component/About.js"));
 
 const AppLayout = () => {
+  //Authentication
+  const [userName, SetUserName] = useState();
+  useEffect(() => {
+    //Make a api call and send userNAme and PAsword
+    const data = {
+      name: "Sukanta",
+    };
+    SetUserName(data.name);
+  }, []);
+
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-    </div>
+    <Provider store={appStore}>
+    <UserContext.Provider value={{ loggedInUser: userName, SetUserName }}>
+      <div className="app">
+        <Header />
+        <Outlet />
+      </div>
+    </UserContext.Provider>
+    </Provider>
   );
 };
 const appRoter = createBrowserRouter([
@@ -33,7 +50,11 @@ const appRoter = createBrowserRouter([
 
       {
         path: "/about",
-        element: <About />,
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <About />
+          </Suspense>
+        ),
       },
 
       {
@@ -43,7 +64,7 @@ const appRoter = createBrowserRouter([
       {
         path: "/grocery",
         element: (
-          <Suspense fallback={<Shimmer />}>
+          <Suspense fallback={<h1>Loading...</h1>}>
             <Grocery />
           </Suspense>
         ),

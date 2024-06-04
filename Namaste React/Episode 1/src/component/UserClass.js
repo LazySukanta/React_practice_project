@@ -1,8 +1,9 @@
 import React from "react";
+import UserContext from "../utils/UserContext";
 
 class UserClass extends React.Component {
   constructor(props) {
-    console.log("Child Constructor");
+    // console.log("Child Constructor");
     super(props);
     this.state = {
       count: 0,
@@ -11,16 +12,20 @@ class UserClass extends React.Component {
     };
   }
 
-  async  componentDidMount() {
+  async componentDidMount() {
     // console.log("Child component did mount");
-
   }
 
   render() {
-    console.log("Child Render");
+    // console.log("Child Render");
     const { name, location } = this.props;
     return (
       <div className="user-card">
+        <UserContext.Consumer>
+          {(data) => {
+            console.log(data);
+          }}
+        </UserContext.Consumer>
         <h2>Name :{name}</h2>
         <h3>Location: {location}</h3>
         <h4>Contact: dindasukanta19@gmail.com</h4>
@@ -30,4 +35,3 @@ class UserClass extends React.Component {
 }
 
 export default UserClass;
- 

@@ -1,5 +1,9 @@
+import { useContext } from "react";
 import { CDN_URL } from "../utils/constants";
+import UserContext from "../utils/UserContext";
+
 const RestaurantCard = ({ restaurant }) => {
+  const { loggedInUser } = useContext(UserContext);
   const {
     id,
     name,
@@ -22,6 +26,7 @@ const RestaurantCard = ({ restaurant }) => {
       <h4 className="py-3">{avgRating} starts</h4>
       <h4>{costForTwo}</h4>
       <h4>{deliveryTime} minutes</h4>
+      <p>User {loggedInUser}</p>
     </div>
   );
 };
@@ -33,7 +38,7 @@ export const withDiscountLabel = (RestaurantCard) => {
   return ({ restaurant, discount }) => {
     return (
       <div className="label">
-        <label className="absolute bg-slate-500 text-white rounded-lg mx-2 p-2 bg-opacity-60">{`${discount.header} ${discount.subHeader}`}</label>
+        <label className="absolute bg-slate-500 text-black rounded-lg mx-2 p-2 bg-opacity-60">{`${discount.header} ${discount.subHeader}`}</label>
         <RestaurantCard restaurant={restaurant} />
       </div>
     );

@@ -1,8 +1,9 @@
 import RestaurantCard, { withDiscountLabel } from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimers from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -12,6 +13,8 @@ const Body = () => {
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
 
   const RestaurantCardWithDiscount = withDiscountLabel(RestaurantCard);
+
+  const { loggedInUser, SetUserName } = useContext(UserContext);
 
   useEffect(() => {
     fetchData();
@@ -32,7 +35,6 @@ const Body = () => {
 
   const onlineStatus = useOnlineStatus();
 
-  console.log(listOfRestaurants);
 
   return listOfRestaurants.length === 0 ? (
     <Shimers />
@@ -70,6 +72,13 @@ const Body = () => {
           >
             Top Rated Restaurant
           </button>
+          <label htmlFor="">UserName:</label>
+          <input
+            className="border border-black p-2"
+            type="text"
+            value={loggedInUser}
+            onChange={(e) => SetUserName(e.target.value)}
+          />
         </div>
       </div>
       <div className="flex flex-wrap ml-5">
@@ -80,7 +89,10 @@ const Body = () => {
           >
             {/* {console.log(restaurant.info.aggregatedDiscountInfoV3) } */}
             {restaurant.info.aggregatedDiscountInfoV3 ? (
-              <RestaurantCardWithDiscount restaurant={restaurant} discount = {restaurant.info.aggregatedDiscountInfoV3}/>
+              <RestaurantCardWithDiscount
+                restaurant={restaurant}
+                discount={restaurant.info.aggregatedDiscountInfoV3}
+              />
             ) : (
               <RestaurantCard restaurant={restaurant} />
             )}
